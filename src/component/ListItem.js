@@ -113,40 +113,45 @@ class ListItem extends Component {
       displayElement = (
         <div>
           <div className='list-item clearfix'>
-            <div>
+            <div className='left edit-list-item'>
               <input
                 type='text'
-                placeholder={todoItem.content}
+                // placeholder={todoItem.content}
+                defaultValue={todoItem.content}
                 onChange={e => this.updateStateContent(e)}
               />
             </div>
 
             {/* save or cancel */}
-            <div>
-              <button
-                onClick={() => {
-                  this.props.editTodoItem(
-                    todoItem.id,
-                    this.state.editedTodoContent
-                  );
+            <div className='right clearfix'>
+              <div className='left'>
+                <button
+                  onClick={() => {
+                    this.props.editTodoItem(
+                      todoItem.id,
+                      this.state.editedTodoContent
+                    );
 
-                  this.setState({
-                    edit: false
-                  });
-                }}
-              >
-                <i class='material-icons'>save</i>
-              </button>
+                    this.setState({
+                      edit: false
+                    });
+                  }}
+                >
+                  <i class='material-icons'>save</i>
+                </button>
+              </div>
 
-              <button
-                onClick={() => {
-                  this.setState({
-                    edit: false
-                  });
-                }}
-              >
-                <i class='material-icons'>cancel</i>
-              </button>
+              <div className='right'>
+                <button
+                  onClick={() => {
+                    this.setState({
+                      edit: false
+                    });
+                  }}
+                >
+                  <i class='material-icons'>cancel</i>
+                </button>
+              </div>
             </div>
           </div>
         </div>
