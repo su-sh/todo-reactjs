@@ -1,26 +1,17 @@
 import React, { Component } from 'react';
 import './App.css';
+import logo from './logo.png';
+import Container from './component/Container';
+import AddTodoInput from './component/AddTodoInput';
 
 import Home from './component/Home';
 import Completed from './component/Completed';
 import Remaining from './component/Remaining';
-
 class App extends Component {
   constructor() {
     super();
     this.state = {
-      todoList: [
-        {
-          id: 123,
-          content: 'create react app',
-          completed: false
-        },
-        {
-          id: 124,
-          content: 'create java app',
-          completed: true
-        }
-      ],
+      todoList: [],
       currentView: 'home'
     };
   }
@@ -29,36 +20,67 @@ class App extends Component {
     let currentView = this.state.currentView;
 
     return (
-      <div>
+      <div className='main-container__div'>
         {/* Header */}
-        <div>
+        <div className='header_container__div'>
           {/* tabs */}
-          <div>
-            <ul>
-              <li onClick={() => this.setState({ currentView: 'home' })}>
-                Home
-              </li>
-              <li onClick={() => this.setState({ currentView: 'completed' })}>
-                Completed
-              </li>
-              <li onClick={() => this.setState({ currentView: 'remaining' })}>
-                Remaining
-              </li>
-            </ul>
+
+          <div className='logo_title'>
+            <div className='logo'>
+              <img alt='logo' src={logo} />
+            </div>
+
+            <div className='title'>TO-DO</div>
           </div>
+
+          <div className='tab-container'>
+            <div
+              className='tab'
+              onClick={() => this.setState({ currentView: 'home' })}
+            >
+              Home
+            </div>
+            <div
+              className='tab'
+              onClick={() => this.setState({ currentView: 'completed' })}
+            >
+              Completed
+            </div>
+            <div
+              className='tab'
+              onClick={() => this.setState({ currentView: 'remaining' })}
+            >
+              Remaining
+            </div>
+          </div>
+
+          <AddTodoInput addTodoItem={this.addTodoItem} />
         </div>
 
-        {/* Body */}
-        {currentView === 'home' && (
-          <Home
-            addTodoItem={this.addTodoItem}
-            todoList={this.state.todoList}
-            toggleTodoItemCompleted={this.toggleTodoItemCompleted}
-            deleteTodoItem={this.deleteTodoItem}
-          />
-        )}
-        {currentView === 'remaining' && <Remaining />}
-        {currentView === 'completed' && <Completed />}
+        <div className='div_container__div'>
+          {/* Body */}
+          {currentView === 'home' && (
+            <Container
+              todoList={this.state.todoList}
+              toggleTodoItemCompleted={this.toggleTodoItemCompleted}
+              deleteTodoItem={this.deleteTodoItem}
+            />
+          )}
+          {currentView === 'remaining' && (
+            <Container
+              todoList={this.getItemList(false)}
+              toggleTodoItemCompleted={this.toggleTodoItemCompleted}
+              deleteTodoItem={this.deleteTodoItem}
+            />
+          )}
+          {currentView === 'completed' && (
+            <Container
+              todoList={this.getItemList(true)}
+              toggleTodoItemCompleted={this.toggleTodoItemCompleted}
+              deleteTodoItem={this.deleteTodoItem}
+            />
+          )}
+        </div>
       </div>
     );
   }
@@ -71,10 +93,22 @@ class App extends Component {
         content: todoContent,
         completed: false
       };
-
     todoList.push(todo);
-
     this.setState(todoList);
+  };
+
+  editTodoItem = (id, content) => {
+    const todoList = this.state.todoList.filter(todoItem => {
+      if (todoItem.id === id) {
+        todoItem.content = content;
+
+        return todoItem;
+      }
+
+      return null;
+    });
+
+    this.setState({ todoList });
   };
 
   deleteTodoItem = id => {
@@ -99,6 +133,32 @@ class App extends Component {
     });
 
     this.setState({ todoList });
+  };
+
+  // gets completed or incompleted list of items
+  getItemList = isCompleted => {
+    let todoList = this.state.todoList;
+    let remainingList = todoList.filter(todoItem => {
+      if (todoItem.completed === isCompleted) {
+        return todoItem;
+      }
+
+      return null;
+    });
+
+    return remainingList;
+  };
+
+  componentDidUpdate = () => {
+    let arrayList = this.state.todoList;
+    localStorage.setItem('todoList', JSON.stringify(arrayList));
+  };
+
+  componentDidMount = () => {
+    let todoList = JSON.parse(localStorage.getItem('todoList'));
+    this.setState({
+      todoList
+    });
   };
 }
 

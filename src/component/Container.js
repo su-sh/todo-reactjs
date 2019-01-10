@@ -1,8 +1,10 @@
 import React from 'react';
 import ListItem from './ListItem';
 
-const Remaining = props => {
+const Container = props => {
   let todoList = props.todoList;
+  console.log('​todoList', todoList);
+
   const todoListEl = todoList.length ? (
     todoList.map(todoItem => {
       return (
@@ -20,10 +22,10 @@ const Remaining = props => {
 
   return (
     <div>
-      Remaining
+      Container
       {todoListEl}
     </div>
   );
 };
 
-export default Remaining;
+export default Container;
