@@ -4,10 +4,8 @@ import logo from './logo.png';
 import Container from './component/Container';
 import AddTodoInput from './component/AddTodoInput';
 
-import Home from './component/Home';
-import Completed from './component/Completed';
-import Remaining from './component/Remaining';
 class App extends Component {
+
   constructor() {
     super();
     this.state = {
@@ -24,12 +22,10 @@ class App extends Component {
         {/* Header */}
         <div className='header_container__div'>
           {/* tabs */}
-
           <div className='logo_title'>
             <div className='logo'>
               <img alt='logo' src={logo} />
             </div>
-
             <div className='title'>TO-DO</div>
           </div>
 
@@ -64,6 +60,7 @@ class App extends Component {
               todoList={this.state.todoList}
               toggleTodoItemCompleted={this.toggleTodoItemCompleted}
               deleteTodoItem={this.deleteTodoItem}
+              editTodoItem={this.editTodoItem}
             />
           )}
           {currentView === 'remaining' && (
@@ -71,6 +68,7 @@ class App extends Component {
               todoList={this.getItemList(false)}
               toggleTodoItemCompleted={this.toggleTodoItemCompleted}
               deleteTodoItem={this.deleteTodoItem}
+              editTodoItem={this.editTodoItem}
             />
           )}
           {currentView === 'completed' && (
@@ -78,6 +76,7 @@ class App extends Component {
               todoList={this.getItemList(true)}
               toggleTodoItemCompleted={this.toggleTodoItemCompleted}
               deleteTodoItem={this.deleteTodoItem}
+              editTodoItem={this.editTodoItem}
             />
           )}
         </div>
@@ -105,7 +104,7 @@ class App extends Component {
         return todoItem;
       }
 
-      return null;
+      return todoItem;
     });
 
     this.setState({ todoList });
@@ -160,6 +159,7 @@ class App extends Component {
       todoList
     });
   };
+
 }
 
 export default App;

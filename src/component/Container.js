@@ -2,8 +2,13 @@ import React from 'react';
 import ListItem from './ListItem';
 
 const Container = props => {
-  let todoList = props.todoList;
-  console.log('​todoList', todoList);
+  let {
+    todoList,
+    toggleTodoItemCompleted,
+    deleteTodoItem,
+    editTodoItem
+  } = props;
+  console.log(props);
 
   const todoListEl = todoList.length ? (
     todoList.map(todoItem => {
@@ -11,8 +16,9 @@ const Container = props => {
         <ListItem
           key={todoItem.id}
           todoItem={todoItem}
-          toggleTodoItemCompleted={props.toggleTodoItemCompleted}
-          deleteTodoItem={props.deleteTodoItem}
+          toggleTodoItemCompleted={toggleTodoItemCompleted}
+          deleteTodoItem={deleteTodoItem}
+          editTodoItem={editTodoItem}
         />
       );
     })
@@ -20,12 +26,7 @@ const Container = props => {
     <div>No todo item</div>
   );
 
-  return (
-    <div>
-      Container
-      {todoListEl}
-    </div>
-  );
+  return <div>{todoListEl}</div>;
 };
 
 export default Container;
