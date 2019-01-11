@@ -1,12 +1,8 @@
 import '../App.css';
-
 import React, { Component } from 'react';
-import AddTodoInputLogic from './AddTodoInputLogic';
-
 import addImg from '../add.png';
 
 class AddTodoInput extends Component {
-
   constructor() {
     super();
 
@@ -23,7 +19,7 @@ class AddTodoInput extends Component {
           placeholder='Add a to-do'
           value={this.state.todoContent}
           onKeyUp={this.checkEnterPressed}
-          onChange={e => this.updateStateContent(e)}
+          onChange={this.updateStateContent}
         />
         <button
           onClick={() => {
@@ -59,7 +55,6 @@ class AddTodoInput extends Component {
 
     // console.log(this.props.firstName);
   };
-
 }
 
 export default AddTodoInput;

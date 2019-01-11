@@ -3,6 +3,8 @@ import './App.css';
 import Container from './component/Container';
 import AddTodoInput from './component/AddTodoInput';
 import Header from './component/Header';
+import Tabs from './component/Tabs';
+
 class App extends Component {
 
   constructor() {
@@ -14,69 +16,50 @@ class App extends Component {
   }
 
   render() {
-    let currentView = this.state.currentView;
-
     return (
       <div className='main-container__div'>
-        {/* Header */}
         <div className='header_container__div'>
+          {/* Header */}
           <Header />
 
-          {/* tabs */}
-          <div className='tab-container'>
-            <div
-              className='tab'
-              onClick={() => this.setState({ currentView: 'home' })}
-            >
-              Home
-            </div>
-            <div
-              className='tab'
-              onClick={() => this.setState({ currentView: 'completed' })}
-            >
-              Completed
-            </div>
-            <div
-              className='tab'
-              onClick={() => this.setState({ currentView: 'remaining' })}
-            >
-              Remaining
-            </div>
-          </div>
+          {/* Tabs */}
+          <Tabs setCurrentView={this.setCurrentView} />
 
+          {/* Body */}
           <AddTodoInput addTodoItem={this.addTodoItem} />
         </div>
 
         <div className='div_container__div'>
           {/* Body */}
-          {currentView === 'home' && (
-            <Container
-              todoList={this.state.todoList}
-              toggleTodoItemCompleted={this.toggleTodoItemCompleted}
-              deleteTodoItem={this.deleteTodoItem}
-              editTodoItem={this.editTodoItem}
-            />
-          )}
-          {currentView === 'remaining' && (
-            <Container
-              todoList={this.getItemList(false)}
-              toggleTodoItemCompleted={this.toggleTodoItemCompleted}
-              deleteTodoItem={this.deleteTodoItem}
-              editTodoItem={this.editTodoItem}
-            />
-          )}
-          {currentView === 'completed' && (
-            <Container
-              todoList={this.getItemList(true)}
-              toggleTodoItemCompleted={this.toggleTodoItemCompleted}
-              deleteTodoItem={this.deleteTodoItem}
-              editTodoItem={this.editTodoItem}
-            />
-          )}
+          <Container
+            todoList={this.getTodoProps()}
+            toggleTodoItemCompleted={this.toggleTodoItemCompleted}
+            deleteTodoItem={this.deleteTodoItem}
+            editTodoItem={this.editTodoItem}
+          />
         </div>
       </div>
     );
   }
+
+  getTodoProps = () => {
+    let todoList;
+
+    switch (this.state.currentView) {
+      case 'home':
+        todoList = this.state.todoList;
+        break;
+      case 'remaining':
+        todoList = this.getItemList(false);
+        break;
+      case 'completed':
+        todoList = this.getItemList(true);
+        break;
+      default:
+    }
+
+    return todoList;
+  };
 
   addTodoItem = todoContent => {
     let newId = Date.now();
@@ -88,12 +71,13 @@ class App extends Component {
     };
 
     let todoList = [...this.state.todoList, todo];
-    // todoList.push(todo);
     this.setState({ todoList });
   };
 
   editTodoItem = (id, content) => {
-    const todoList = this.state.todoList.filter(todoItem => {
+    let newTodoList = this.state.todoList.map(item => ({ ...item }));
+
+    const todoList = newTodoList.filter(todoItem => {
       if (todoItem.id === id) {
         todoItem.content = content;
 
@@ -107,7 +91,9 @@ class App extends Component {
   };
 
   deleteTodoItem = id => {
-    const todoList = this.state.todoList.filter(todoItem => {
+    let newTodoList = this.state.todoList.map(item => ({ ...item }));
+
+    const todoList = newTodoList.filter(todoItem => {
       if (todoItem.id !== id) {
         return todoItem;
       }
@@ -119,7 +105,9 @@ class App extends Component {
   };
 
   toggleTodoItemCompleted = id => {
-    const todoList = this.state.todoList.filter(todoItem => {
+    let newTodoList = this.state.todoList.map(item => ({ ...item }));
+
+    const todoList = newTodoList.filter(todoItem => {
       if (todoItem.id === id) {
         todoItem.completed = !todoItem.completed;
       }
@@ -144,6 +132,12 @@ class App extends Component {
     return remainingList;
   };
 
+  setCurrentView = view => {
+    this.setState({
+      currentView: view
+    });
+  };
+
   componentDidUpdate = () => {
     let arrayList = this.state.todoList;
     localStorage.setItem('todoList', JSON.stringify(arrayList));
@@ -151,9 +145,12 @@ class App extends Component {
 
   componentDidMount = () => {
     let todoList = JSON.parse(localStorage.getItem('todoList'));
-    this.setState({
-      todoList
-    });
+
+    if (todoList !== null) {
+      this.setState({
+        todoList
+      });
+    }
   };
 
 }
