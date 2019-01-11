@@ -1,6 +1,7 @@
 import '../App.css';
 
 import React, { Component } from 'react';
+import AddTodoInputLogic from './AddTodoInputLogic';
 
 import addImg from '../add.png';
 
@@ -55,6 +56,8 @@ class AddTodoInput extends Component {
         todoContent: ''
       });
     }
+
+    // console.log(this.props.firstName);
   };
 
 }

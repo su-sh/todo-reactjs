@@ -1,9 +1,8 @@
 import React, { Component } from 'react';
 import './App.css';
-import logo from './logo.png';
 import Container from './component/Container';
 import AddTodoInput from './component/AddTodoInput';
-
+import Header from './component/Header';
 class App extends Component {
 
   constructor() {
@@ -21,14 +20,9 @@ class App extends Component {
       <div className='main-container__div'>
         {/* Header */}
         <div className='header_container__div'>
-          {/* tabs */}
-          <div className='logo_title'>
-            <div className='logo'>
-              <img alt='logo' src={logo} />
-            </div>
-            <div className='title'>TO-DO</div>
-          </div>
+          <Header />
 
+          {/* tabs */}
           <div className='tab-container'>
             <div
               className='tab'
@@ -85,15 +79,17 @@ class App extends Component {
   }
 
   addTodoItem = todoContent => {
-    let todoList = this.state.todoList,
-      newId = Date.now(),
-      todo = {
-        id: newId,
-        content: todoContent,
-        completed: false
-      };
-    todoList.push(todo);
-    this.setState(todoList);
+    let newId = Date.now();
+
+    let todo = {
+      id: newId,
+      content: todoContent,
+      completed: false
+    };
+
+    let todoList = [...this.state.todoList, todo];
+    // todoList.push(todo);
+    this.setState({ todoList });
   };
 
   editTodoItem = (id, content) => {

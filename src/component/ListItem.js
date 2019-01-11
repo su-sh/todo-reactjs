@@ -52,7 +52,6 @@ import '../App.css';
 // import React, { Component } from 'react';
 
 class ListItem extends Component {
-
   constructor() {
     super();
     this.state = {
@@ -62,8 +61,8 @@ class ListItem extends Component {
   }
 
   render() {
-    let todoItem = this.props.todoItem;
     // props.data
+    let todoItem = this.props.todoItem;
 
     let completedCss = '';
     todoItem.completed
@@ -95,14 +94,14 @@ class ListItem extends Component {
                 });
               }}
             >
-              <i class='material-icons'>edit</i>
+              <i className='material-icons'>edit</i>
             </button>
 
             <button
               className='delete-button'
               onClick={() => this.props.deleteTodoItem(todoItem.id)}
             >
-              <i class='material-icons'>delete</i>
+              <i className='material-icons'>delete</i>
             </button>
           </div>
 
@@ -127,17 +126,10 @@ class ListItem extends Component {
               <div className='left'>
                 <button
                   onClick={() => {
-                    this.props.editTodoItem(
-                      todoItem.id,
-                      this.state.editedTodoContent
-                    );
-
-                    this.setState({
-                      edit: false
-                    });
+                    this.handleSave(todoItem);
                   }}
                 >
-                  <i class='material-icons'>save</i>
+                  <i className='material-icons'>save</i>
                 </button>
               </div>
 
@@ -149,7 +141,7 @@ class ListItem extends Component {
                     });
                   }}
                 >
-                  <i class='material-icons'>cancel</i>
+                  <i className='material-icons'>cancel</i>
                 </button>
               </div>
             </div>
@@ -168,6 +160,16 @@ class ListItem extends Component {
     });
   };
 
+  handleSave = todoItem => {
+    if (this.state.editedTodoContent !== '') {
+      this.props.editTodoItem(todoItem.id, this.state.editedTodoContent);
+      this.setState({
+        edit: false
+      });
+    } else {
+      alert('Input cannot be empty');
+    }
+  };
 }
 
 export default ListItem;

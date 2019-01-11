@@ -8,7 +8,6 @@ const Container = props => {
     deleteTodoItem,
     editTodoItem
   } = props;
-  console.log(props);
 
   const todoListEl = todoList.length ? (
     todoList.map(todoItem => {
