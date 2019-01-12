@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+
 import '../App.css';
 
 class ListItem extends Component {
@@ -11,34 +12,8 @@ class ListItem extends Component {
     };
   }
 
-  render() {
-    // props.data
-    let todoItem = this.props.todoItem;
-
-    // condition for edit
-    if (!this.state.edit) {
-      return (
-        <TodoItemElement
-          todoItem={todoItem}
-          setEdit={this.setEdit}
-          deleteItem={this.deleteItem}
-          toggleTodoItemCompleted={this.props.toggleTodoItemCompleted}
-        />
-      );
-    } else {
-      return (
-        <EditTodo
-          todoItem={todoItem}
-          updateStateContent={this.updateStateContent}
-          handleSave={this.handleSave}
-          cancelEdit={this.cancelEdit}
-        />
-      );
-    }
-  }
-
   updateStateContent = e => {
-    let editedTodoContent = e.target.value;
+    const editedTodoContent = e.target.value;
     this.setState({
       editedTodoContent
     });
@@ -59,17 +34,35 @@ class ListItem extends Component {
     this.props.deleteTodoItem(this.props.todoItem.id);
   };
 
-  cancelEdit = () => {
-    this.setState({
-      edit: false
-    });
-  };
-
   setEdit = bool => {
     this.setState({
       edit: bool
     });
   };
+
+  render() {
+    let todoItem = this.props.todoItem;
+
+    if (!this.state.edit) {
+      return (
+        <TodoItemElement
+          todoItem={todoItem}
+          setEdit={this.setEdit}
+          deleteItem={this.deleteItem}
+          toggleTodoItemCompleted={this.props.toggleTodoItemCompleted}
+        />
+      );
+    } else {
+      return (
+        <EditTodo
+          todoItem={todoItem}
+          updateStateContent={this.updateStateContent}
+          handleSave={this.handleSave}
+          setEdit={this.setEdit}
+        />
+      );
+    }
+  }
 
 }
 
@@ -77,42 +70,41 @@ export default ListItem;
 
 // EditTodo Functional Component
 const EditTodo = props => {
-  let { todoItem, updateStateContent, handleSave, cancelEdit } = props;
+  let { todoItem, updateStateContent, handleSave, setEdit } = props;
 
   return (
     <div>
-      <div className='list-item clearfix'>
-        <div className='left edit-list-item'>
+      <div className="list-item clearfix">
+        <div className="left edit-list-item">
           <input
-            type='text'
+            type="text"
             defaultValue={todoItem.content}
             onChange={e => updateStateContent(e)}
           />
         </div>
 
-        {/* save or cancel */}
-        <div className='right clearfix'>
-          <div className='left'>
+        <div className="right clearfix edit-cancel">
+          <div className="left">
             <button
-              className='delete-edit-button'
-              title='Save'
+              className="delete-edit-button"
+              title="Save"
               onClick={() => {
                 handleSave(todoItem);
               }}
             >
-              <i className='material-icons'>save</i>
+              <i className="material-icons">save</i>
             </button>
           </div>
 
-          <div className='right'>
+          <div className="right">
             <button
-              title='Edit'
-              className='delete-edit-button'
+              title="Cancel"
+              className="delete-edit-button"
               onClick={() => {
-                cancelEdit();
+                setEdit(false);
               }}
             >
-              <i className='material-icons'>cancel</i>
+              <i className="material-icons">cancel</i>
             </button>
           </div>
         </div>
@@ -131,12 +123,12 @@ const TodoItemElement = props => {
     : (completedCss = 'todoItem');
 
   return (
-    <div className='list-item clearfix'>
+    <div className="list-item clearfix">
       <input
-        className='left'
-        type='checkbox'
+        className="left"
+        type="checkbox"
         checked={todoItem.completed}
-        onClick={() => {
+        onChange={() => {
           toggleTodoItemCompleted(todoItem.id);
         }}
       />
@@ -145,21 +137,21 @@ const TodoItemElement = props => {
 
       <div className={'right clearfix'}>
         <button
-          className='delete-edit-button'
-          title='Edit'
+          className="delete-edit-button"
+          title="Edit"
           onClick={() => {
             setEdit(true);
           }}
         >
-          <i className='material-icons'>edit</i>
+          <i className="material-icons">edit</i>
         </button>
 
         <button
-          className='delete-edit-button'
-          title='Delete'
+          className="delete-edit-button"
+          title="Delete"
           onClick={deleteItem}
         >
-          <i className='material-icons'>delete</i>
+          <i className="material-icons">delete</i>
         </button>
       </div>
     </div>

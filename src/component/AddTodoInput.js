@@ -1,8 +1,10 @@
-import '../App.css';
 import React, { Component } from 'react';
-import addImg from '../add.png';
+
+import '../App.css';
+import addImg from '../assets/add.png';
 
 class AddTodoInput extends Component {
+
   constructor() {
     super();
 
@@ -11,29 +13,8 @@ class AddTodoInput extends Component {
     };
   }
 
-  render() {
-    return (
-      <div className='add-todo'>
-        <input
-          type='text'
-          placeholder='Add a to-do'
-          value={this.state.todoContent}
-          onKeyUp={this.checkEnterPressed}
-          onChange={this.updateStateContent}
-        />
-        <button
-          onClick={() => {
-            this.addTodo();
-          }}
-        >
-          <img src={addImg} alt='add' />
-        </button>
-      </div>
-    );
-  }
-
   updateStateContent = e => {
-    let todoContent = e.target.value;
+    const todoContent = e.target.value;
     this.setState({
       todoContent
     });
@@ -52,9 +33,26 @@ class AddTodoInput extends Component {
         todoContent: ''
       });
     }
-
-    // console.log(this.props.firstName);
   };
+
+  render() {
+    return (
+      <div className="add-todo">
+        <input
+          type="text"
+          placeholder="Add TO-DO"
+          value={this.state.todoContent}
+          onKeyUp={this.checkEnterPressed}
+          onChange={this.updateStateContent}
+        />
+
+        <button onClick={this.addTodo}>
+          <img src={addImg} alt="add" title="add-button" />
+        </button>
+      </div>
+    );
+  }
+
 }
 
 export default AddTodoInput;

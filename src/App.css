@@ -1,11 +1,14 @@
-#root {
-  font-family: 'Open Sans', sans-serif;
+body {
+  overflow-y: scroll;
   background-color: #f1f4f9;
-  height: 100vh;
 }
 * {
   padding: 0px;
   margin: 0px;
+}
+#root {
+  font-family: 'Open Sans', sans-serif;
+  height: 100vh;
 }
 .clearfix::before,
 .clearfix::after {
@@ -20,13 +23,11 @@
 .right {
   float: right;
 }
-.main-container__div {
-  /* background-color: aliceblue;
-  */
+.main-container {
   width: 100%;
   margin: 0 auto;
 }
-.header_container__div {
+.header_container {
   width: 100%;
   max-width: 80%;
   margin: 0 auto;
@@ -34,22 +35,22 @@
 .logo {
   position: absolute;
   left: 0;
-  top: 20px;
+  top: 19px;
 }
 .logo > img {
-  width: 80px;
-  height: 80px;
+  width: 50px;
+  height: 50px;
 }
 .logo_title {
   position: relative;
   width: 100%;
-  padding-top: 50px;
-  padding-bottom: 50px;
+  padding-top: 30px;
+  padding-bottom: 30px;
 }
 .title {
   text-align: center;
+  font-size: 20px;
 }
-/* tab */
 .tab-container {
   text-align: justify;
 }
@@ -62,20 +63,12 @@
   cursor: pointer;
 }
 .tab:first-child {
-  /* background-color: yellow;
-  */
   border-top-left-radius: 8px;
   border-bottom-left-radius: 8px;
-  /* border-right: 3px solid #f1f4f9;
-  */
 }
 .tab:last-child {
-  /* background-color: yellow;
-  */
   border-top-right-radius: 8px;
   border-bottom-right-radius: 8px;
-  /* border-left: 3px solid #f1f4f9;
-  */
 }
 .tab:hover {
   background-color: #f8f4fe;
@@ -85,19 +78,22 @@
   margin-bottom: 10px;
 }
 .add-todo > input {
-  padding-left: 20px;
-  padding-right: 20px;
+  padding: 5px 20px 5px 20px;
   width: calc(100% - 20px - 20px - 80px);
   font-size: 20px;
   height: 30px;
   margin-left: 10px;
   margin-top: 4px;
+  border-radius: 5px;
+  border: 0;
+  padding-top: 5px;
+  padding-bottom: 5px;
 }
 .add-todo > button > img {
-  width: 40px;
-  height: 40px;
+  width: 35px;
+  height: 35px;
   display: block;
-  margin-top: 2px;
+  margin-top: 5px;
 }
 .add-todo > button {
   border: 1px solid transparent;
@@ -105,22 +101,20 @@
   float: right;
   margin-right: 10px;
 }
-/* body */
-.div_container__div {
+.div_container {
   width: 100%;
   max-width: 80%;
   margin: 0 auto;
   margin-top: 30px;
   margin-bottom: 30px;
 }
-/* todo Item */
 .list-item {
   margin-top: 10px;
   margin-bottom: 10px;
 }
 .list-item > input {
   margin-right: 20px;
-  margin-top: 10px;
+  margin-top: 9px;
 }
 .list-item {
   background-color: #f8f9fc;
@@ -143,7 +137,7 @@
   overflow: hidden;
 }
 .todoItem-completed {
-  width: 86%;
+  width: calc(100% - 100px);
   overflow: hidden;
   text-decoration: line-through;
 }
@@ -161,4 +155,21 @@
   border: 0;
   margin-left: 5px;
   color: #37404e;
+}
+.search-todo {
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+.search-todo > input {
+  padding: 5px 20px 5px 20px;
+  width: calc(100% - 20px - 40px);
+  font-size: 20px;
+  height: 30px;
+  margin-left: 10px;
+  margin-top: 4px;
+  border-radius: 5px;
+  border: 0;
+}
+.edit-cancel {
+  margin-top: 3px;
 }

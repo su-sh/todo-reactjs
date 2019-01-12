@@ -1,58 +1,41 @@
 import React, { Component } from 'react';
-import './App.css';
-import Container from './component/Container';
-import AddTodoInput from './component/AddTodoInput';
-import Header from './component/Header';
-import Tabs from './component/Tabs';
 
+import Tabs from './component/Tabs';
+import Header from './component/Header';
+import Container from './component/Container';
+import SearchTodo from './component/SearchTodo';
+import AddTodoInput from './component/AddTodoInput';
+
+import './App.css';
+
+const TABS = {
+  HOME: 'home',
+  REMAINING: 'remaining',
+  COMPLETED: 'completed'
+};
 class App extends Component {
 
   constructor() {
     super();
+
     this.state = {
       todoList: [],
-      currentView: 'home'
+      activeTab: 'home',
+      searchString: ''
     };
-  }
-
-  render() {
-    return (
-      <div className='main-container__div'>
-        <div className='header_container__div'>
-          {/* Header */}
-          <Header />
-
-          {/* Tabs */}
-          <Tabs setCurrentView={this.setCurrentView} />
-
-          {/* Body */}
-          <AddTodoInput addTodoItem={this.addTodoItem} />
-        </div>
-
-        <div className='div_container__div'>
-          {/* Body */}
-          <Container
-            todoList={this.getTodoProps()}
-            toggleTodoItemCompleted={this.toggleTodoItemCompleted}
-            deleteTodoItem={this.deleteTodoItem}
-            editTodoItem={this.editTodoItem}
-          />
-        </div>
-      </div>
-    );
   }
 
   getTodoProps = () => {
     let todoList;
 
-    switch (this.state.currentView) {
-      case 'home':
-        todoList = this.state.todoList;
+    switch (this.state.activeTab) {
+      case TABS.HOME:
+        todoList = this.getFilteredSearchItem(this.state.todoList);
         break;
-      case 'remaining':
+      case TABS.REMAINING:
         todoList = this.getItemList(false);
         break;
-      case 'completed':
+      case TABS.COMPLETED:
         todoList = this.getItemList(true);
         break;
       default:
@@ -61,21 +44,27 @@ class App extends Component {
     return todoList;
   };
 
+  setCurrentView = view => {
+    this.setState({
+      activeTab: view
+    });
+  };
+
   addTodoItem = todoContent => {
     let newId = Date.now();
 
-    let todo = {
+    const todo = {
       id: newId,
       content: todoContent,
       completed: false
     };
 
-    let todoList = [...this.state.todoList, todo];
+    const todoList = [todo, ...this.state.todoList];
     this.setState({ todoList });
   };
 
   editTodoItem = (id, content) => {
-    let newTodoList = this.state.todoList.map(item => ({ ...item }));
+    const newTodoList = this.state.todoList.map(item => ({ ...item }));
 
     const todoList = newTodoList.filter(todoItem => {
       if (todoItem.id === id) {
@@ -91,7 +80,7 @@ class App extends Component {
   };
 
   deleteTodoItem = id => {
-    let newTodoList = this.state.todoList.map(item => ({ ...item }));
+    const newTodoList = this.state.todoList.map(item => ({ ...item }));
 
     const todoList = newTodoList.filter(todoItem => {
       if (todoItem.id !== id) {
@@ -105,7 +94,7 @@ class App extends Component {
   };
 
   toggleTodoItemCompleted = id => {
-    let newTodoList = this.state.todoList.map(item => ({ ...item }));
+    const newTodoList = this.state.todoList.map(item => ({ ...item }));
 
     const todoList = newTodoList.filter(todoItem => {
       if (todoItem.id === id) {
@@ -120,31 +109,60 @@ class App extends Component {
 
   // gets completed or incompleted list of items
   getItemList = isCompleted => {
-    let todoList = this.state.todoList;
-    let remainingList = todoList.filter(todoItem => {
+    const todoList = this.state.todoList;
+
+    let returnList = todoList.filter(todoItem => {
       if (todoItem.completed === isCompleted) {
         return todoItem;
       }
 
       return null;
     });
+    returnList = this.getFilteredSearchItem(returnList);
 
-    return remainingList;
+    return returnList;
   };
 
-  setCurrentView = view => {
+  changeSearchString = e => {
+    const searchString = e.target.value;
     this.setState({
-      currentView: view
+      searchString
     });
   };
 
+  checkEmptySearch = () => {
+    const checkString = this.state.searchString.trim();
+    if (checkString.length === 0) {
+      return true;
+    } else {
+      return false;
+    }
+  };
+
+  getFilteredSearchItem(todoList) {
+    let returnList = todoList;
+
+    if (!this.checkEmptySearch()) {
+      returnList = todoList.filter(todoItem => {
+        if (todoItem.content.includes(this.state.searchString)) {
+          return todoItem;
+        }
+
+        return null;
+      });
+    }
+
+    return returnList;
+  }
+
   componentDidUpdate = () => {
-    let arrayList = this.state.todoList;
+    const arrayList = this.state.todoList;
+
     localStorage.setItem('todoList', JSON.stringify(arrayList));
   };
 
   componentDidMount = () => {
-    let todoList = JSON.parse(localStorage.getItem('todoList'));
+    const todoList = JSON.parse(localStorage.getItem('todoList'));
 
     if (todoList !== null) {
       this.setState({
@@ -152,6 +170,31 @@ class App extends Component {
       });
     }
   };
+
+  render() {
+    return (
+      <div className="main-container">
+        <div className="header_container">
+          <Header />
+
+          <Tabs setCurrentView={this.setCurrentView} />
+
+          <SearchTodo changeSearchString={this.changeSearchString} />
+
+          <AddTodoInput addTodoItem={this.addTodoItem} />
+        </div>
+
+        <div className="div_container">
+          <Container
+            todoList={this.getTodoProps()}
+            toggleTodoItemCompleted={this.toggleTodoItemCompleted}
+            deleteTodoItem={this.deleteTodoItem}
+            editTodoItem={this.editTodoItem}
+          />
+        </div>
+      </div>
+    );
+  }
 
 }
 
