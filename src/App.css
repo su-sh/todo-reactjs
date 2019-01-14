@@ -70,8 +70,6 @@ body {
 
 .tab:hover {
   background-color: #f8f9fc;
-
-  /* background-color: #f8f4fe; */
 }
 .tab:first-child {
   border-top-left-radius: 8px;
