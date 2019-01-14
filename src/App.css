@@ -55,12 +55,17 @@ body {
   text-align: justify;
 }
 .tab {
-  background-color: #f8f9fc;
+  background-color: #eaedf7;
   width: calc(33.33%);
   padding: 20px 0 20px 0;
   display: inline-block;
   text-align: center;
   cursor: pointer;
+  border-bottom: 4px solid transparent;
+}
+.tab-active {
+  background-color: #f8f9fc;
+  border-bottom: 4px solid #00ffff;
 }
 .tab:first-child {
   border-top-left-radius: 8px;
@@ -100,6 +105,7 @@ body {
   background-color: transparent;
   float: right;
   margin-right: 10px;
+  cursor: pointer;
 }
 .div_container {
   width: 100%;
@@ -113,6 +119,7 @@ body {
   margin-top: 9px;
 }
 .list-item {
+  cursor: pointer;
   background-color: #f8f9fc;
   margin-top: 10px;
   margin-bottom: 10px;
@@ -171,4 +178,9 @@ body {
 }
 input[type='checkbox'] {
   transform: scale(1.5);
+  cursor: pointer;
+}
+
+button {
+  cursor: pointer;
 }

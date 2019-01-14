@@ -173,7 +173,10 @@ class App extends Component {
         <div className="header_container">
           <Header />
 
-          <Tabs setCurrentView={this.setCurrentView} />
+          <Tabs
+            setCurrentView={this.setCurrentView}
+            activeTab={this.state.activeTab}
+          />
 
           <SearchTodo changeSearchString={this.changeSearchString} />
 

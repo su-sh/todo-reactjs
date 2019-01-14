@@ -29,7 +29,8 @@ class ListItem extends Component {
     }
   };
 
-  deleteItem = () => {
+  deleteItem = e => {
+    e.stopPropagation();
     this.props.deleteTodoItem(this.props.todoItem.id);
   };
 
@@ -112,7 +113,7 @@ const EditTodo = props => {
             <button
               title="Cancel"
               className="delete-edit-button"
-              onClick={() => {
+              onClick={e => {
                 setEdit(false);
               }}
             >
@@ -134,30 +135,27 @@ const TodoItemElement = props => {
     : 'todoItem';
 
   return (
-    <div className="list-item clearfix">
+    <div
+      className="list-item clearfix"
+      onClick={() => {
+        toggleTodoItemCompleted(todoItem.id);
+      }}
+    >
       <input
         className="left"
         type="checkbox"
+        onChange={() => {}}
         checked={todoItem.completed}
-        onChange={() => {
-          toggleTodoItemCompleted(todoItem.id);
-        }}
       />
 
-      <div
-        className={completedCss + ' left'}
-        onClick={() => {
-          toggleTodoItemCompleted(todoItem.id);
-        }}
-      >
-        {todoItem.content}
-      </div>
+      <div className={completedCss + ' left'}>{todoItem.content}</div>
 
       <div className={'right clearfix'}>
         <button
           className="delete-edit-button"
           title="Edit"
-          onClick={() => {
+          onClick={e => {
+            e.stopPropagation();
             setEdit(true);
           }}
         >
