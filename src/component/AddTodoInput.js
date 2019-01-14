@@ -27,7 +27,7 @@ class AddTodoInput extends Component {
   };
 
   addTodo = () => {
-    if (this.state.todoContent !== '') {
+    if (this.state.todoContent.trim() !== '') {
       this.props.addTodoItem(this.state.todoContent);
       this.setState({
         todoContent: ''
@@ -47,7 +47,7 @@ class AddTodoInput extends Component {
         />
 
         <button onClick={this.addTodo}>
-          <img src={addImg} alt="add" title="add-button" />
+          <img src={addImg} alt="add" title="Add Button" />
         </button>
       </div>
     );

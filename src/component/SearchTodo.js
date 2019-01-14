@@ -1,7 +1,7 @@
 import React from 'react';
 
 const SearchTodo = props => {
-  let { changeSearchString } = props;
+  const { changeSearchString } = props;
 
   return (
     <div className="search-todo">

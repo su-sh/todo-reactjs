@@ -19,12 +19,11 @@ class ListItem extends Component {
     });
   };
 
-  handleSave = todoItem => {
-    if (this.state.editedTodoContent !== '') {
-      this.props.editTodoItem(todoItem.id, this.state.editedTodoContent);
-      this.setState({
-        edit: false
-      });
+  handleSave = () => {
+    const todoItemId = this.props.todoItem.id;
+    if (this.state.editedTodoContent.trim() !== '') {
+      this.props.editTodoItem(todoItemId, this.state.editedTodoContent);
+      this.setEdit(false);
     } else {
       alert('Please change your todo content. \nOr press cancel button.');
     }
@@ -40,8 +39,17 @@ class ListItem extends Component {
     });
   };
 
+  handelEscEnterPress = e => {
+    if (e.key === 'Enter') {
+      this.handleSave();
+    }
+    if (e.key === 'Escape') {
+      this.setEdit(false);
+    }
+  };
+
   render() {
-    let todoItem = this.props.todoItem;
+    const todoItem = this.props.todoItem;
 
     if (!this.state.edit) {
       return (
@@ -59,6 +67,7 @@ class ListItem extends Component {
           updateStateContent={this.updateStateContent}
           handleSave={this.handleSave}
           setEdit={this.setEdit}
+          handelEscEnterPress={this.handelEscEnterPress}
         />
       );
     }
@@ -68,12 +77,17 @@ class ListItem extends Component {
 
 export default ListItem;
 
-// EditTodo Functional Component
 const EditTodo = props => {
-  let { todoItem, updateStateContent, handleSave, setEdit } = props;
+  const {
+    todoItem,
+    updateStateContent,
+    handleSave,
+    setEdit,
+    handelEscEnterPress
+  } = props;
 
   return (
-    <div>
+    <div onKeyUp={handelEscEnterPress}>
       <div className="list-item clearfix">
         <div className="left edit-list-item">
           <input
@@ -88,9 +102,7 @@ const EditTodo = props => {
             <button
               className="delete-edit-button"
               title="Save"
-              onClick={() => {
-                handleSave(todoItem);
-              }}
+              onClick={handleSave}
             >
               <i className="material-icons">save</i>
             </button>
@@ -115,12 +127,11 @@ const EditTodo = props => {
 
 // TodoItemElement Functional Component
 const TodoItemElement = props => {
-  let { todoItem, setEdit, deleteItem, toggleTodoItemCompleted } = props;
+  const { todoItem, setEdit, deleteItem, toggleTodoItemCompleted } = props;
 
-  let completedCss = '';
-  todoItem.completed
-    ? (completedCss = 'todoItem todoItem-completed')
-    : (completedCss = 'todoItem');
+  const completedCss = todoItem.completed
+    ? 'todoItem todoItem-completed'
+    : 'todoItem';
 
   return (
     <div className="list-item clearfix">
@@ -133,7 +144,14 @@ const TodoItemElement = props => {
         }}
       />
 
-      <div className={completedCss + ' left'}>{todoItem.content}</div>
+      <div
+        className={completedCss + ' left'}
+        onClick={() => {
+          toggleTodoItemCompleted(todoItem.id);
+        }}
+      >
+        {todoItem.content}
+      </div>
 
       <div className={'right clearfix'}>
         <button

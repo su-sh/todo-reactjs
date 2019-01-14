@@ -3,16 +3,12 @@ import React, { Component } from 'react';
 import Tabs from './component/Tabs';
 import Header from './component/Header';
 import Container from './component/Container';
+import TABS from './constants/commonConstants';
 import SearchTodo from './component/SearchTodo';
 import AddTodoInput from './component/AddTodoInput';
 
 import './App.css';
 
-const TABS = {
-  HOME: 'home',
-  REMAINING: 'remaining',
-  COMPLETED: 'completed'
-};
 class App extends Component {
 
   constructor() {
@@ -20,7 +16,7 @@ class App extends Component {
 
     this.state = {
       todoList: [],
-      activeTab: 'home',
+      activeTab: TABS.HOME,
       searchString: ''
     };
   }
