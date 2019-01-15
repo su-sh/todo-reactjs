@@ -5,7 +5,7 @@ import TABS from '../constants/commonConstants';
  * Displays Tab List.
  *
  * @param {object} props
- * @returns {*}
+ * @returns {object}
  */
 const Tabs = props => {
   const { setCurrentView, activeTab } = props;

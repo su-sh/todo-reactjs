@@ -5,7 +5,7 @@ import logo from '../assets/logo.png';
 /**
  * Renders Header.
  *
- *  @returns {*}.
+ *  @returns {object}
  */
 const Header = () => {
   return (

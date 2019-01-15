@@ -5,8 +5,8 @@ import ListItem from './ListItem';
 /**
  * Displays List.
  *
- * @param {*} props
- * @returns {*}
+ * @param {object} props
+ * @returns {object}
  */
 const Container = props => {
   const {

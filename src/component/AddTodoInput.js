@@ -3,8 +3,19 @@ import React, { Component } from 'react';
 import '../App.css';
 import addImg from '../assets/add.png';
 
+/**
+ *
+ *
+ * @class AddTodoInput
+ * @extends {Component}
+ */
 class AddTodoInput extends Component {
 
+  /**
+   * Creates an instance of AddTodoInput.
+   *
+   * @memberof AddTodoInput
+   */
   constructor() {
     super();
 
@@ -13,19 +24,34 @@ class AddTodoInput extends Component {
     };
   }
 
+  /**
+   *
+   * @param {object} e
+   * @memberof AddTodoInput
+   */
   updateStateContent = e => {
     const todoContent = e.target.value;
+
     this.setState({
       todoContent
     });
   };
 
+  /**
+   *
+   * @param {object} e
+   * @memberof AddTodoInput
+   */
   checkEnterPressed = e => {
     if (e.key === 'Enter') {
       this.addTodo();
     }
   };
 
+  /**
+   *
+   * @memberof AddTodoInput
+   */
   addTodo = () => {
     if (this.state.todoContent.trim() !== '') {
       this.props.addTodoItem(this.state.todoContent);
@@ -35,6 +61,12 @@ class AddTodoInput extends Component {
     }
   };
 
+  /**
+   *
+   *
+   * @returns {*}
+   * @memberof AddTodoInput
+   */
   render() {
     return (
       <div className="add-todo">
