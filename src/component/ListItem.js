@@ -40,7 +40,7 @@ class ListItem extends Component {
     });
   };
 
-  handelEscEnterPress = e => {
+  handleEscEnterPress = e => {
     if (e.key === 'Enter') {
       this.handleSave();
     }
@@ -68,7 +68,7 @@ class ListItem extends Component {
           updateStateContent={this.updateStateContent}
           handleSave={this.handleSave}
           setEdit={this.setEdit}
-          handelEscEnterPress={this.handelEscEnterPress}
+          handleEscEnterPress={this.handleEscEnterPress}
         />
       );
     }
@@ -84,11 +84,11 @@ const EditTodo = props => {
     updateStateContent,
     handleSave,
     setEdit,
-    handelEscEnterPress
+    handleEscEnterPress
   } = props;
 
   return (
-    <div onKeyUp={handelEscEnterPress}>
+    <div onKeyUp={handleEscEnterPress}>
       <div className="list-item clearfix">
         <div className="left edit-list-item">
           <input
@@ -114,6 +114,7 @@ const EditTodo = props => {
               title="Cancel"
               className="delete-edit-button"
               onClick={e => {
+                e.stopPropagation();
                 setEdit(false);
               }}
             >

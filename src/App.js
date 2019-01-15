@@ -128,11 +128,8 @@ class App extends Component {
 
   checkEmptySearch = () => {
     const checkString = this.state.searchString.trim();
-    if (checkString.length === 0) {
-      return true;
-    } else {
-      return false;
-    }
+
+    return checkString.length === 0;
   };
 
   getFilteredSearchItem(todoList) {
