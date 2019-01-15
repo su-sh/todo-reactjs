@@ -1,8 +1,187 @@
+body {
+  overflow-y: scroll;
+  background-color: #f1f4f9;
+}
+* {
+  padding: 0px;
+  margin: 0px;
+}
+#root {
+  font-family: 'Open Sans', sans-serif;
+  height: 100vh;
+}
+.clearfix::before,
+.clearfix::after {
+  content: '';
+  display: table;
+  clear: both;
+  overflow: auto;
+}
+.left {
+  float: left;
+}
+.right {
+  float: right;
+}
+.main-container {
+  width: 100%;
+  margin: 0 auto;
+}
+.header_container {
+  width: 100%;
+  max-width: 80%;
+  margin: 0 auto;
+}
+.logo {
+  position: absolute;
+  left: 0;
+  top: 19px;
+}
+.logo > h1 > img {
+  width: 50px;
+  height: 50px;
+}
+.logo_title {
+  position: relative;
+  width: 100%;
+  padding-top: 30px;
+  padding-bottom: 30px;
+}
+.title {
+  text-align: center;
+  font-size: 20px;
+}
+.tab-container {
+  text-align: justify;
+}
+.tab {
+  background-color: #eaedff;
+  width: calc(33.33%);
+  padding: 20px 0 20px 0;
+  display: inline-block;
+  text-align: center;
+  cursor: pointer;
+  border-bottom: 4px solid transparent;
+}
+.tab-active {
+  background-color: #f8f9fc;
+  border-bottom: 4px solid #00ffff;
+}
+
+.tab:hover {
+  background-color: #f8f9fc;
+}
+.tab:first-child {
+  border-top-left-radius: 8px;
+  border-bottom-left-radius: 8px;
+}
+.tab:last-child {
+  border-top-right-radius: 8px;
+  border-bottom-right-radius: 8px;
+}
+.add-todo {
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+.add-todo > input {
+  padding: 5px 20px 5px 20px;
+  width: calc(100% - 20px - 20px - 80px);
+  font-size: 20px;
+  height: 30px;
+  margin-left: 10px;
+  margin-top: 4px;
+  border-radius: 5px;
+  border: 0;
+  padding-top: 5px;
+  padding-bottom: 5px;
+}
+.add-todo > button > img {
+  width: 35px;
+  height: 35px;
+  display: block;
+  margin-top: 5px;
+}
+.add-todo > button {
+  border: 1px solid transparent;
+  background-color: transparent;
+  float: right;
+  margin-right: 10px;
+  cursor: pointer;
+}
+.div_container {
+  width: 100%;
+  max-width: 80%;
+  margin: 0 auto;
+  margin-top: 30px;
+  margin-bottom: 30px;
+}
+.list-item > input {
+  margin-right: 20px;
+  margin-top: 9px;
+}
+.list-item {
+  cursor: pointer;
+  background-color: #f8f9fc;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  border-radius: 3px;
+  padding-left: 20px;
+  padding-right: 20px;
+}
+.list-item:hover {
+  background-color: #f8f4fe;
+}
 .todoItem {
-  color: red;
+  color: black;
+  cursor: pointer;
+  margin-top: 3px;
+  width: calc(100% - 100px);
+  overflow: hidden;
+}
+.todoItem-completed {
+  width: calc(100% - 100px);
+  overflow: hidden;
+  text-decoration: line-through;
+}
+.edit-list-item {
+  width: calc(100% - 60px);
+}
+.edit-list-item > input {
+  width: calc(100% - 20px);
+  height: 24px;
+  padding-left: 10px;
+  margin-top: 2px;
+}
+.delete-edit-button {
+  background: transparent;
+  border: 0;
+  margin-left: 5px;
+  color: #37404e;
+}
+.search-todo {
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+.search-todo > input {
+  padding: 5px 20px 5px 20px;
+  width: calc(100% - 20px - 40px);
+  font-size: 20px;
+  height: 30px;
+  margin-left: 10px;
+  margin-top: 4px;
+  border-radius: 5px;
+  border: 0;
+}
+.edit-cancel {
+  margin-top: 3px;
+}
+input[type='checkbox'] {
+  transform: scale(1.5);
   cursor: pointer;
 }
 
-.todoItem-completed {
-  text-decoration: line-through;
+button {
+  cursor: pointer;
 }

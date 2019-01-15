@@ -1,84 +1,84 @@
 import React, { Component } from 'react';
+
+import Tabs from './component/Tabs';
+import Header from './component/Header';
+import Container from './component/Container';
+import TABS from './constants/commonConstants';
+import SearchTodo from './component/SearchTodo';
+import AddTodoInput from './component/AddTodoInput';
+
 import './App.css';
 
-import Home from './component/Home';
-import Completed from './component/Completed';
-import Remaining from './component/Remaining';
-
 class App extends Component {
+
   constructor() {
     super();
+
     this.state = {
-      todoList: [
-        {
-          id: 123,
-          content: 'create react app',
-          completed: false
-        },
-        {
-          id: 124,
-          content: 'create java app',
-          completed: true
-        }
-      ],
-      currentView: 'home'
+      todoList: [],
+      activeTab: TABS.HOME,
+      searchString: ''
     };
   }
 
-  render() {
-    let currentView = this.state.currentView;
+  getTodoProps = () => {
+    let todoList;
 
-    return (
-      <div>
-        {/* Header */}
-        <div>
-          {/* tabs */}
-          <div>
-            <ul>
-              <li onClick={() => this.setState({ currentView: 'home' })}>
-                Home
-              </li>
-              <li onClick={() => this.setState({ currentView: 'completed' })}>
-                Completed
-              </li>
-              <li onClick={() => this.setState({ currentView: 'remaining' })}>
-                Remaining
-              </li>
-            </ul>
-          </div>
-        </div>
+    switch (this.state.activeTab) {
+      case TABS.HOME:
+        todoList = this.getFilteredSearchItem(this.state.todoList);
+        break;
+      case TABS.REMAINING:
+        todoList = this.getItemList(false);
+        break;
+      case TABS.COMPLETED:
+        todoList = this.getItemList(true);
+        break;
+      default:
+    }
 
-        {/* Body */}
-        {currentView === 'home' && (
-          <Home
-            addTodoItem={this.addTodoItem}
-            todoList={this.state.todoList}
-            toggleTodoItemCompleted={this.toggleTodoItemCompleted}
-            deleteTodoItem={this.deleteTodoItem}
-          />
-        )}
-        {currentView === 'remaining' && <Remaining />}
-        {currentView === 'completed' && <Completed />}
-      </div>
-    );
-  }
+    return todoList;
+  };
+
+  setCurrentView = view => {
+    this.setState({
+      activeTab: view
+    });
+  };
 
   addTodoItem = todoContent => {
-    let todoList = this.state.todoList,
-      newId = Date.now(),
-      todo = {
-        id: newId,
-        content: todoContent,
-        completed: false
-      };
+    let newId = Date.now();
 
-    todoList.push(todo);
+    const todo = {
+      id: newId,
+      content: todoContent,
+      completed: false
+    };
 
-    this.setState(todoList);
+    const todoList = [todo, ...this.state.todoList];
+    this.setState({ todoList });
+  };
+
+  editTodoItem = (id, content) => {
+    const newTodoList = this.state.todoList.map(item => ({ ...item }));
+
+    const todoList = newTodoList.filter(todoItem => {
+      if (todoItem.id === id) {
+        todoItem.content = content;
+
+        return todoItem;
+      }
+
+      return todoItem;
+    });
+
+    this.setState({ todoList });
   };
 
   deleteTodoItem = id => {
-    const todoList = this.state.todoList.filter(todoItem => {
+    const newTodoList = this.state.todoList.map(item => ({ ...item }));
+
+    const todoList = newTodoList.filter(todoItem => {
       if (todoItem.id !== id) {
         return todoItem;
       }
@@ -90,7 +90,9 @@ class App extends Component {
   };
 
   toggleTodoItemCompleted = id => {
-    const todoList = this.state.todoList.filter(todoItem => {
+    const newTodoList = this.state.todoList.map(item => ({ ...item }));
+
+    const todoList = newTodoList.filter(todoItem => {
       if (todoItem.id === id) {
         todoItem.completed = !todoItem.completed;
       }
@@ -100,6 +102,96 @@ class App extends Component {
 
     this.setState({ todoList });
   };
+
+  // gets completed or incompleted list of items
+  getItemList = isCompleted => {
+    const todoList = this.state.todoList;
+
+    let returnList = todoList.filter(todoItem => {
+      if (todoItem.completed === isCompleted) {
+        return todoItem;
+      }
+
+      return null;
+    });
+    returnList = this.getFilteredSearchItem(returnList);
+
+    return returnList;
+  };
+
+  changeSearchString = e => {
+    const searchString = e.target.value;
+    this.setState({
+      searchString
+    });
+  };
+
+  checkEmptySearch = () => {
+    const checkString = this.state.searchString.trim();
+
+    return checkString.length === 0;
+  };
+
+  getFilteredSearchItem(todoList) {
+    let returnList = todoList;
+
+    if (!this.checkEmptySearch()) {
+      returnList = todoList.filter(todoItem => {
+        if (todoItem.content.includes(this.state.searchString)) {
+          return todoItem;
+        }
+
+        return null;
+      });
+    }
+
+    return returnList;
+  }
+
+  componentDidUpdate = () => {
+    const arrayList = this.state.todoList;
+
+    localStorage.setItem('todoList', JSON.stringify(arrayList));
+  };
+
+  componentDidMount = () => {
+    const todoList = JSON.parse(localStorage.getItem('todoList'));
+
+    if (todoList !== null) {
+      this.setState({
+        todoList
+      });
+    }
+  };
+
+  render() {
+    return (
+      <div className="main-container">
+        <div className="header_container">
+          <Header />
+
+          <Tabs
+            setCurrentView={this.setCurrentView}
+            activeTab={this.state.activeTab}
+          />
+
+          <SearchTodo changeSearchString={this.changeSearchString} />
+
+          <AddTodoInput addTodoItem={this.addTodoItem} />
+        </div>
+
+        <div className="div_container">
+          <Container
+            todoList={this.getTodoProps()}
+            toggleTodoItemCompleted={this.toggleTodoItemCompleted}
+            deleteTodoItem={this.deleteTodoItem}
+            editTodoItem={this.editTodoItem}
+          />
+        </div>
+      </div>
+    );
+  }
+
 }
 
 export default App;
