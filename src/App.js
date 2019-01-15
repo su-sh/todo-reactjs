@@ -31,9 +31,9 @@ class App extends Component {
   }
 
   /**
-   * Returns todoList.
    *
-   * @returns {array}
+   *
+   * @returns {array} TodoList.
    */
   getTodoProps = () => {
     let todoList;
@@ -172,6 +172,7 @@ class App extends Component {
   };
 
   /**
+   * This function changes searchString in state.
    *
    * @param {object} e
    * @memberof App
