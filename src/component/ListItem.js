@@ -2,8 +2,19 @@ import React, { Component } from 'react';
 
 import '../App.css';
 
+/**
+ *
+ *
+ * @class ListItem
+ * @extends {Component}
+ */
 class ListItem extends Component {
 
+  /**
+   * Creates an instance of ListItem.
+   *
+   * @memberof ListItem
+   */
   constructor() {
     super();
     this.state = {
@@ -12,15 +23,27 @@ class ListItem extends Component {
     };
   }
 
+  /**
+   *
+   * @param {object} e
+   * @memberof ListItem
+   */
   updateStateContent = e => {
     const editedTodoContent = e.target.value;
+
     this.setState({
       editedTodoContent
     });
   };
 
+  /**
+   *
+   *
+   * @memberof ListItem
+   */
   handleSave = () => {
     const todoItemId = this.props.todoItem.id;
+
     if (this.state.editedTodoContent.trim() !== '') {
       this.props.editTodoItem(todoItemId, this.state.editedTodoContent);
       this.setEdit(false);
@@ -29,17 +52,32 @@ class ListItem extends Component {
     }
   };
 
+  /**
+   *
+   * @param {object} e
+   * @memberof ListItem
+   */
   deleteItem = e => {
     e.stopPropagation();
     this.props.deleteTodoItem(this.props.todoItem.id);
   };
 
+  /**
+   *
+   * @param {boolean} bool
+   * @memberof ListItem
+   */
   setEdit = bool => {
     this.setState({
       edit: bool
     });
   };
 
+  /**
+   *
+   * @param {object} e
+   * @memberof ListItem
+   */
   handleEscEnterPress = e => {
     if (e.key === 'Enter') {
       this.handleSave();
@@ -49,6 +87,12 @@ class ListItem extends Component {
     }
   };
 
+  /**
+   *
+   *
+   * @returns {*}
+   * @memberof ListItem
+   */
   render() {
     const todoItem = this.props.todoItem;
 
@@ -78,6 +122,12 @@ class ListItem extends Component {
 
 export default ListItem;
 
+/**
+ *
+ *
+ * @param {object} props
+ * @returns {*}
+ */
 const EditTodo = props => {
   const {
     todoItem,
@@ -127,7 +177,12 @@ const EditTodo = props => {
   );
 };
 
-// TodoItemElement Functional Component
+/**
+ * TodoItemElement Functional Component.
+ *
+ * @param {object} props
+ * @returns {*}
+ */
 const TodoItemElement = props => {
   const { todoItem, setEdit, deleteItem, toggleTodoItemCompleted } = props;
 

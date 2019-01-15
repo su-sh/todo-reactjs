@@ -9,8 +9,17 @@ import AddTodoInput from './component/AddTodoInput';
 
 import './App.css';
 
+/**
+ * This is Class.
+ *
+ */
 class App extends Component {
 
+  /**
+   * Creates an instance of App.
+   *
+   * @memberof App
+   */
   constructor() {
     super();
 
@@ -21,6 +30,11 @@ class App extends Component {
     };
   }
 
+  /**
+   * Returns todoList.
+   *
+   * @returns {array}
+   */
   getTodoProps = () => {
     let todoList;
 
@@ -40,14 +54,25 @@ class App extends Component {
     return todoList;
   };
 
+  /**
+   * Sets activeTab.
+   *
+   * @param {boolean} view
+   */
   setCurrentView = view => {
     this.setState({
       activeTab: view
     });
   };
 
+  /**
+   * This function adds new todo item to states todoList.
+   *
+   * @param {string} todoContent
+   * @memberof App
+   */
   addTodoItem = todoContent => {
-    let newId = Date.now();
+    const newId = Date.now();
 
     const todo = {
       id: newId,
@@ -56,9 +81,17 @@ class App extends Component {
     };
 
     const todoList = [todo, ...this.state.todoList];
+
     this.setState({ todoList });
   };
 
+  /**
+   * This function edits todo item.
+   *
+   * @param {number} id
+   * @param {string} content
+   * @memberof App
+   */
   editTodoItem = (id, content) => {
     const newTodoList = this.state.todoList.map(item => ({ ...item }));
 
@@ -75,6 +108,12 @@ class App extends Component {
     this.setState({ todoList });
   };
 
+  /**
+   * This function deletes todo item.
+   *
+   * @param {number} id
+   * @memberof App
+   */
   deleteTodoItem = id => {
     const newTodoList = this.state.todoList.map(item => ({ ...item }));
 
@@ -89,6 +128,12 @@ class App extends Component {
     this.setState({ todoList });
   };
 
+  /**
+   * This function toggles todoItem's completed property item.
+   *
+   * @param {number} id
+   * @memberof App
+   */
   toggleTodoItemCompleted = id => {
     const newTodoList = this.state.todoList.map(item => ({ ...item }));
 
@@ -103,7 +148,13 @@ class App extends Component {
     this.setState({ todoList });
   };
 
-  // gets completed or incompleted list of items
+  /**
+   * This returns filtered todoList by completed status.
+   *
+   * @param {boolean} isCompleted
+   * @returns {array}
+   * @memberof App
+   */
   getItemList = isCompleted => {
     const todoList = this.state.todoList;
 
@@ -114,25 +165,43 @@ class App extends Component {
 
       return null;
     });
+
     returnList = this.getFilteredSearchItem(returnList);
 
     return returnList;
   };
 
+  /**
+   *
+   * @param {object} e
+   * @memberof App
+   */
   changeSearchString = e => {
     const searchString = e.target.value;
+
     this.setState({
       searchString
     });
   };
 
+  /**
+   *
+   * @returns {boolean}
+   * @memberof App
+   */
   checkEmptySearch = () => {
     const checkString = this.state.searchString.trim();
 
     return checkString.length === 0;
   };
 
-  getFilteredSearchItem(todoList) {
+  /**
+   *
+   * @param {array} todoList
+   * @returns {array}
+   * @memberof App
+   */
+  getFilteredSearchItem = todoList => {
     let returnList = todoList;
 
     if (!this.checkEmptySearch()) {
@@ -146,7 +215,7 @@ class App extends Component {
     }
 
     return returnList;
-  }
+  };
 
   componentDidUpdate = () => {
     const arrayList = this.state.todoList;
@@ -164,6 +233,12 @@ class App extends Component {
     }
   };
 
+  /**
+   *
+   *
+   * @returns {*}
+   * @memberof App
+   */
   render() {
     return (
       <div className="main-container">

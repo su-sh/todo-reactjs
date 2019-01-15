@@ -2,6 +2,11 @@ import React from 'react';
 
 import logo from '../assets/logo.png';
 
+/**
+ * Renders Header.
+ *
+ *  @returns {*}.
+ */
 const Header = () => {
   return (
     <div className="logo_title">
