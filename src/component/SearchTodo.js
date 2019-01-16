@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 /**
  * Renders Search Bar.
@@ -14,6 +15,10 @@ const SearchTodo = props => {
       <input placeholder="Search" onChange={changeSearchString} />
     </div>
   );
+};
+
+SearchTodo.propTypes = {
+  changeSearchString: PropTypes.func
 };
 
 export default SearchTodo;

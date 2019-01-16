@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 
 import '../App.css';
@@ -10,7 +11,6 @@ import addImg from '../assets/add.png';
  * @extends {Component}
  */
 class AddTodoInput extends Component {
-
   /**
    * Creates an instance of AddTodoInput.
    *
@@ -84,7 +84,10 @@ class AddTodoInput extends Component {
       </div>
     );
   }
-
 }
+
+AddTodoInput.propTypes = {
+  name: PropTypes.string
+};
 
 export default AddTodoInput;

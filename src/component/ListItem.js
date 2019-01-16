@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 
 import '../App.css';
@@ -9,7 +10,6 @@ import '../App.css';
  * @extends {Component}
  */
 class ListItem extends Component {
-
   /**
    * Creates an instance of ListItem.
    *
@@ -117,13 +117,19 @@ class ListItem extends Component {
       );
     }
   }
-
 }
+
+ListItem.propTypes = {
+  todoItem: PropTypes.object,
+  toggleTodoItemCompleted: PropTypes.func,
+  deleteTodoItem: PropTypes.func,
+  editTodoItem: PropTypes.func
+};
 
 export default ListItem;
 
 /**
- *
+ * EditTodo: Functional Component.
  *
  * @param {object} props
  * @returns {*}
@@ -177,8 +183,16 @@ const EditTodo = props => {
   );
 };
 
+EditTodo.propTypes = {
+  todoItem: PropTypes.object,
+  updateStateContent: PropTypes.func,
+  handleSave: PropTypes.func,
+  setEdit: PropTypes.func,
+  handleEscEnterPress: PropTypes.func
+};
+
 /**
- * TodoItemElement Functional Component.
+ * TodoItemElement: Functional Component.
  *
  * @param {object} props
  * @returns {*}
@@ -228,4 +242,11 @@ const TodoItemElement = props => {
       </div>
     </div>
   );
+};
+
+TodoItemElement.propsTypes = {
+  todoItem: PropTypes.object,
+  setEdit: PropTypes.func,
+  deleteItem: PropTypes.func,
+  toggleTodoItemCompleted: PropTypes.func
 };

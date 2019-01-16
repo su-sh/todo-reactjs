@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 import ListItem from './ListItem';
 
@@ -33,6 +34,13 @@ const Container = props => {
   );
 
   return <div>{todoListEl}</div>;
+};
+
+Container.propTypes = {
+  todoList: PropTypes.array,
+  toggleTodoItemCompleted: PropTypes.func,
+  deleteTodoItem: PropTypes.func,
+  editTodoItem: PropTypes.func
 };
 
 export default Container;
