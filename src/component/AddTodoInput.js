@@ -4,7 +4,7 @@ import '../App.css';
 import addImg from '../assets/add.png';
 
 /**
- *
+ * This holds overall component logic of add todo input.
  *
  * @class AddTodoInput
  * @extends {Component}
@@ -51,7 +51,7 @@ class AddTodoInput extends Component {
   };
 
   /**
-   * It invokes addTodoItem function obtained from props.
+   * It addsTodo by invoking addTodoItem function obtained from props.
    *
    * @memberof AddTodoInput
    */
