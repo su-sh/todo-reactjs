@@ -10,11 +10,12 @@ import AddTodoInput from './component/AddTodoInput';
 import './App.css';
 
 /**
- * This is Class.
+ * This class holds overall components and logic of the application
  *
+ * @class App
+ * @extends {Component}
  */
 class App extends Component {
-
   /**
    * Creates an instance of App.
    *
@@ -31,7 +32,7 @@ class App extends Component {
   }
 
   /**
-   *
+   * It returns the filtered todoList according to current active tab
    *
    * @returns {array} TodoList.
    */
@@ -55,7 +56,7 @@ class App extends Component {
   };
 
   /**
-   * Sets activeTab.
+   * It sets activeTab.
    *
    * @param {boolean} view
    */
@@ -66,9 +67,9 @@ class App extends Component {
   };
 
   /**
-   * This function adds new todo item to states todoList.
+   * It adds new todoItem to state's todoList.
    *
-   * @param {string} todoContent
+   * @param {string} todoContent It is the content of the todo item.
    * @memberof App
    */
   addTodoItem = todoContent => {
@@ -86,10 +87,10 @@ class App extends Component {
   };
 
   /**
-   * This function edits todo item.
+   * It edits the todo item from the state.
    *
-   * @param {number} id
-   * @param {string} content
+   * @param {number} id It is the id of the todo item.
+   * @param {string} content It is the content of the todo item
    * @memberof App
    */
   editTodoItem = (id, content) => {
@@ -109,10 +110,10 @@ class App extends Component {
   };
 
   /**
-   * This function deletes todo item.
+   * It deletes todo item.
    *
    * @param {number} id
-   * @memberof App
+   * @memberof App It is the id of the todo item
    */
   deleteTodoItem = id => {
     const newTodoList = this.state.todoList.map(item => ({ ...item }));
@@ -129,7 +130,7 @@ class App extends Component {
   };
 
   /**
-   * This function toggles todoItem's completed property item.
+   * It toggles todoItem's completed property.
    *
    * @param {number} id
    * @memberof App
@@ -149,7 +150,7 @@ class App extends Component {
   };
 
   /**
-   * This returns filtered todoList by completed status.
+   * It returns filtered todoList according to todo item's completed status.
    *
    * @param {boolean} isCompleted
    * @returns {array}
@@ -172,9 +173,9 @@ class App extends Component {
   };
 
   /**
-   * This function changes searchString in state.
+   * It changes current search string in the state.
    *
-   * @param {object} e
+   * @param {object} event
    * @memberof App
    */
   changeSearchString = e => {
@@ -186,6 +187,7 @@ class App extends Component {
   };
 
   /**
+   * It checks for empty searchString is empty in the state.
    *
    * @returns {boolean}
    * @memberof App
@@ -197,6 +199,7 @@ class App extends Component {
   };
 
   /**
+   * It returns todoList search according to searchString.
    *
    * @param {array} todoList
    * @returns {array}
@@ -267,7 +270,6 @@ class App extends Component {
       </div>
     );
   }
-
 }
 
 export default App;

@@ -9,7 +9,6 @@ import '../App.css';
  * @extends {Component}
  */
 class ListItem extends Component {
-
   /**
    * Creates an instance of ListItem.
    *
@@ -24,8 +23,9 @@ class ListItem extends Component {
   }
 
   /**
+   * It updates editedTodoContent from state.
    *
-   * @param {object} e
+   * @param {object} event
    * @memberof ListItem
    */
   updateStateContent = e => {
@@ -37,7 +37,7 @@ class ListItem extends Component {
   };
 
   /**
-   *
+   * It invokes editTodoItem from
    *
    * @memberof ListItem
    */
@@ -53,8 +53,10 @@ class ListItem extends Component {
   };
 
   /**
+   * It deletes todo item from list.
+   * & invokes deleteTodoItem function obtained from props.
    *
-   * @param {object} e
+   * @param {object} event
    * @memberof ListItem
    */
   deleteItem = e => {
@@ -63,6 +65,7 @@ class ListItem extends Component {
   };
 
   /**
+   * It sets edit property to state.
    *
    * @param {boolean} bool
    * @memberof ListItem
@@ -74,8 +77,9 @@ class ListItem extends Component {
   };
 
   /**
+   * It handles Enter and Escape keypress.
    *
-   * @param {object} e
+   * @param {object} event
    * @memberof ListItem
    */
   handleEscEnterPress = e => {
@@ -117,13 +121,12 @@ class ListItem extends Component {
       );
     }
   }
-
 }
 
 export default ListItem;
 
 /**
- *
+ * It is functional component that renders edit todo component
  *
  * @param {object} props
  * @returns {*}
@@ -178,7 +181,7 @@ const EditTodo = props => {
 };
 
 /**
- * TodoItemElement Functional Component.
+ * Functional Component.
  *
  * @param {object} props
  * @returns {*}

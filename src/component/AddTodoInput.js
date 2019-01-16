@@ -10,7 +10,6 @@ import addImg from '../assets/add.png';
  * @extends {Component}
  */
 class AddTodoInput extends Component {
-
   /**
    * Creates an instance of AddTodoInput.
    *
@@ -25,6 +24,7 @@ class AddTodoInput extends Component {
   }
 
   /**
+   * It updates todoContent in state.
    *
    * @param {object} e
    * @memberof AddTodoInput
@@ -38,8 +38,10 @@ class AddTodoInput extends Component {
   };
 
   /**
+   * It checks if enter is pressed and if pressed invokes addTodo.
    *
-   * @param {object} e
+   *
+   * @param {object} event
    * @memberof AddTodoInput
    */
   checkEnterPressed = e => {
@@ -49,6 +51,7 @@ class AddTodoInput extends Component {
   };
 
   /**
+   * It invokes addTodoItem function obtained from props.
    *
    * @memberof AddTodoInput
    */
@@ -84,7 +87,6 @@ class AddTodoInput extends Component {
       </div>
     );
   }
-
 }
 
 export default AddTodoInput;

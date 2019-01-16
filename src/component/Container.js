@@ -3,7 +3,7 @@ import React from 'react';
 import ListItem from './ListItem';
 
 /**
- * Displays TodoList.
+ * It renders TodoList.
  *
  * @param {object} props
  * @returns {object}
