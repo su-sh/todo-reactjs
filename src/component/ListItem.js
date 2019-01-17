@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 import '../App.css';
 
 /**
- *
+ * Renders TodoList Items
  *
  * @class ListItem
  * @extends {Component}
@@ -126,7 +126,8 @@ class ListItem extends Component {
 export default ListItem;
 
 /**
- * It is functional component that renders edit todo component
+ * Functional component
+ * This renders edit todo component
  *
  * @param {object} props
  * @returns {*}
@@ -182,6 +183,7 @@ const EditTodo = props => {
 
 /**
  * Functional Component.
+ * This renders single todo element
  *
  * @param {object} props
  * @returns {*}

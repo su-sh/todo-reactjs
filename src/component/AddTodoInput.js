@@ -4,7 +4,7 @@ import '../App.css';
 import addImg from '../assets/add.png';
 
 /**
- * This holds overall component logic of add todo input.
+ * It holds overall component logic of add todo input.
  *
  * @class AddTodoInput
  * @extends {Component}
