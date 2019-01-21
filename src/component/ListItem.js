@@ -4,7 +4,7 @@ import React, { Component } from 'react';
 import '../App.css';
 
 /**
- *
+ * Renders TodoList Items
  *
  * @class ListItem
  * @extends {Component}
@@ -24,8 +24,9 @@ class ListItem extends Component {
   }
 
   /**
+   * It updates editedTodoContent from state.
    *
-   * @param {object} e
+   * @param {object} event
    * @memberof ListItem
    */
   updateStateContent = e => {
@@ -37,7 +38,7 @@ class ListItem extends Component {
   };
 
   /**
-   *
+   * It invokes editTodoItem from
    *
    * @memberof ListItem
    */
@@ -53,8 +54,10 @@ class ListItem extends Component {
   };
 
   /**
+   * It deletes todo item from list.
+   * & invokes deleteTodoItem function obtained from props.
    *
-   * @param {object} e
+   * @param {object} event
    * @memberof ListItem
    */
   deleteItem = e => {
@@ -63,6 +66,7 @@ class ListItem extends Component {
   };
 
   /**
+   * It sets edit property to state.
    *
    * @param {boolean} bool
    * @memberof ListItem
@@ -74,8 +78,9 @@ class ListItem extends Component {
   };
 
   /**
+   * It handles Enter and Escape keypress.
    *
-   * @param {object} e
+   * @param {object} event
    * @memberof ListItem
    */
   handleEscEnterPress = e => {
@@ -129,7 +134,8 @@ ListItem.propTypes = {
 export default ListItem;
 
 /**
- * EditTodo: Functional Component.
+ * Functional component
+ * This renders edit todo component
  *
  * @param {object} props
  * @returns {*}
@@ -192,7 +198,8 @@ EditTodo.propTypes = {
 };
 
 /**
- * TodoItemElement: Functional Component.
+ * Functional Component.
+ * This renders single todo element
  *
  * @param {object} props
  * @returns {*}

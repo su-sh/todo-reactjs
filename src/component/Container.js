@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import ListItem from './ListItem';
 
 /**
- * Displays TodoList.
+ * It renders TodoList.
  *
  * @param {object} props
  * @returns {object}
