@@ -2,8 +2,18 @@ import React, { Component } from 'react';
 
 import '../App.css';
 
+/**
+ * Renders TodoList Items
+ *
+ * @class ListItem
+ * @extends {Component}
+ */
 class ListItem extends Component {
-
+  /**
+   * Creates an instance of ListItem.
+   *
+   * @memberof ListItem
+   */
   constructor() {
     super();
     this.state = {
@@ -12,15 +22,28 @@ class ListItem extends Component {
     };
   }
 
+  /**
+   * It updates editedTodoContent from state.
+   *
+   * @param {object} event
+   * @memberof ListItem
+   */
   updateStateContent = e => {
     const editedTodoContent = e.target.value;
+
     this.setState({
       editedTodoContent
     });
   };
 
+  /**
+   * It invokes editTodoItem from
+   *
+   * @memberof ListItem
+   */
   handleSave = () => {
     const todoItemId = this.props.todoItem.id;
+
     if (this.state.editedTodoContent.trim() !== '') {
       this.props.editTodoItem(todoItemId, this.state.editedTodoContent);
       this.setEdit(false);
@@ -29,17 +52,36 @@ class ListItem extends Component {
     }
   };
 
+  /**
+   * It deletes todo item from list.
+   * & invokes deleteTodoItem function obtained from props.
+   *
+   * @param {object} event
+   * @memberof ListItem
+   */
   deleteItem = e => {
     e.stopPropagation();
     this.props.deleteTodoItem(this.props.todoItem.id);
   };
 
+  /**
+   * It sets edit property to state.
+   *
+   * @param {boolean} bool
+   * @memberof ListItem
+   */
   setEdit = bool => {
     this.setState({
       edit: bool
     });
   };
 
+  /**
+   * It handles Enter and Escape keypress.
+   *
+   * @param {object} event
+   * @memberof ListItem
+   */
   handleEscEnterPress = e => {
     if (e.key === 'Enter') {
       this.handleSave();
@@ -49,6 +91,12 @@ class ListItem extends Component {
     }
   };
 
+  /**
+   *
+   *
+   * @returns {*}
+   * @memberof ListItem
+   */
   render() {
     const todoItem = this.props.todoItem;
 
@@ -73,11 +121,17 @@ class ListItem extends Component {
       );
     }
   }
-
 }
 
 export default ListItem;
 
+/**
+ * Functional component
+ * This renders edit todo component
+ *
+ * @param {object} props
+ * @returns {*}
+ */
 const EditTodo = props => {
   const {
     todoItem,
@@ -127,7 +181,13 @@ const EditTodo = props => {
   );
 };
 
-// TodoItemElement Functional Component
+/**
+ * Functional Component.
+ * This renders single todo element
+ *
+ * @param {object} props
+ * @returns {*}
+ */
 const TodoItemElement = props => {
   const { todoItem, setEdit, deleteItem, toggleTodoItemCompleted } = props;
 

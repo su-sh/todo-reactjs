@@ -2,6 +2,12 @@ import React from 'react';
 
 import ListItem from './ListItem';
 
+/**
+ * It renders TodoList.
+ *
+ * @param {object} props
+ * @returns {object}
+ */
 const Container = props => {
   const {
     todoList,

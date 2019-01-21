@@ -5,12 +5,8 @@
     "mocha": true,
     "browser": true
   },
-  "extends": [
-    "eslint:recommended"
-  ],
-  "plugins": [
-    "react"
-  ],
+  "extends": ["eslint:recommended", "eslint-config-leapfrog"],
+  "plugins": ["react"],
   "parser": "babel-eslint",
   "parserOptions": {
     "ecmaVersion": 2017,
@@ -32,12 +28,19 @@
     "newline-before-return": ["error"],
     "linebreak-style": ["error", "unix"],
     "spaced-comment": ["error", "always"],
-    "indent": ["error", 2, {"SwitchCase": 1}],
+    "indent": ["error", 2, { "SwitchCase": 1 }],
     "object-curly-spacing": ["error", "always"],
-    "camelcase": ["error", {"properties": "never"}],
-    "padded-blocks": ["error", {"classes": "always"}],
-    "comma-spacing": ["error", {"before": false, "after": true}],
-    "quotes": ["error", "single", {"allowTemplateLiterals": true}],
-    "valid-jsdoc": ["warn", {"requireReturn": false, "requireParamDescription": false, "requireReturnDescription": false}]
+    "camelcase": ["error", { "properties": "never" }],
+    "padded-blocks": ["error", { "classes": "always" }],
+    "comma-spacing": ["error", { "before": false, "after": true }],
+    "quotes": ["error", "single", { "allowTemplateLiterals": true }],
+    "valid-jsdoc": [
+      "warn",
+      {
+        "requireReturn": false,
+        "requireParamDescription": false,
+        "requireReturnDescription": false
+      }
+    ]
   }
 }

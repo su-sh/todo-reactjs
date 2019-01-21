@@ -9,8 +9,18 @@ import AddTodoInput from './component/AddTodoInput';
 
 import './App.css';
 
+/**
+ * This class holds overall components and logic of the application
+ *
+ * @class App
+ * @extends {Component}
+ */
 class App extends Component {
-
+  /**
+   * Creates an instance of App.
+   *
+   * @memberof App
+   */
   constructor() {
     super();
 
@@ -21,6 +31,11 @@ class App extends Component {
     };
   }
 
+  /**
+   * It returns the filtered todoList according to current active tab
+   *
+   * @returns {array} TodoList.
+   */
   getTodoProps = () => {
     let todoList;
 
@@ -40,14 +55,25 @@ class App extends Component {
     return todoList;
   };
 
+  /**
+   * It sets activeTab.
+   *
+   * @param {boolean} view
+   */
   setCurrentView = view => {
     this.setState({
       activeTab: view
     });
   };
 
+  /**
+   * It adds new todoItem to state's todoList.
+   *
+   * @param {string} todoContent It is the content of the todo item.
+   * @memberof App
+   */
   addTodoItem = todoContent => {
-    let newId = Date.now();
+    const newId = Date.now();
 
     const todo = {
       id: newId,
@@ -56,9 +82,17 @@ class App extends Component {
     };
 
     const todoList = [todo, ...this.state.todoList];
+
     this.setState({ todoList });
   };
 
+  /**
+   * It edits the todo item from the state.
+   *
+   * @param {number} id It is the id of the todo item.
+   * @param {string} content It is the content of the todo item
+   * @memberof App
+   */
   editTodoItem = (id, content) => {
     const newTodoList = this.state.todoList.map(item => ({ ...item }));
 
@@ -75,6 +109,12 @@ class App extends Component {
     this.setState({ todoList });
   };
 
+  /**
+   * It deletes todo item.
+   *
+   * @param {number} id
+   * @memberof App It is the id of the todo item
+   */
   deleteTodoItem = id => {
     const newTodoList = this.state.todoList.map(item => ({ ...item }));
 
@@ -89,6 +129,12 @@ class App extends Component {
     this.setState({ todoList });
   };
 
+  /**
+   * It toggles todoItem's completed property.
+   *
+   * @param {number} id
+   * @memberof App
+   */
   toggleTodoItemCompleted = id => {
     const newTodoList = this.state.todoList.map(item => ({ ...item }));
 
@@ -103,7 +149,13 @@ class App extends Component {
     this.setState({ todoList });
   };
 
-  // gets completed or incompleted list of items
+  /**
+   * It returns filtered todoList according to todo item's completed status.
+   *
+   * @param {boolean} isCompleted
+   * @returns {array}
+   * @memberof App
+   */
   getItemList = isCompleted => {
     const todoList = this.state.todoList;
 
@@ -114,25 +166,46 @@ class App extends Component {
 
       return null;
     });
+
     returnList = this.getFilteredSearchItem(returnList);
 
     return returnList;
   };
 
+  /**
+   * It changes current search string in the state.
+   *
+   * @param {object} event
+   * @memberof App
+   */
   changeSearchString = e => {
     const searchString = e.target.value;
+
     this.setState({
       searchString
     });
   };
 
+  /**
+   * It checks for empty searchString is empty in the state.
+   *
+   * @returns {boolean}
+   * @memberof App
+   */
   checkEmptySearch = () => {
     const checkString = this.state.searchString.trim();
 
     return checkString.length === 0;
   };
 
-  getFilteredSearchItem(todoList) {
+  /**
+   * It returns todoList search according to searchString.
+   *
+   * @param {array} todoList
+   * @returns {array}
+   * @memberof App
+   */
+  getFilteredSearchItem = todoList => {
     let returnList = todoList;
 
     if (!this.checkEmptySearch()) {
@@ -146,7 +219,7 @@ class App extends Component {
     }
 
     return returnList;
-  }
+  };
 
   componentDidUpdate = () => {
     const arrayList = this.state.todoList;
@@ -164,6 +237,12 @@ class App extends Component {
     }
   };
 
+  /**
+   *
+   *
+   * @returns {*}
+   * @memberof App
+   */
   render() {
     return (
       <div className="main-container">
@@ -191,7 +270,6 @@ class App extends Component {
       </div>
     );
   }
-
 }
 
 export default App;

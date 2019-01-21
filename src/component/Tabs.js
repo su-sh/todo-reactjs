@@ -1,8 +1,14 @@
 import React from 'react';
 import TABS from '../constants/commonConstants';
 
+/**
+ * Displays Tab List.
+ *
+ * @param {object} props
+ * @returns {object}
+ */
 const Tabs = props => {
-  let { setCurrentView, activeTab } = props;
+  const { setCurrentView, activeTab } = props;
 
   return (
     <div className="tab-container">
