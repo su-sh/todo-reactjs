@@ -1,4 +1,6 @@
 import React from 'react';
+import PropTypes from 'prop-types';
+
 import TABS from '../constants/commonConstants';
 
 /**
@@ -34,6 +36,11 @@ const Tabs = props => {
       </div>
     </div>
   );
+};
+
+Tabs.propTypes = {
+  setCurrentView: PropTypes.func,
+  activeTab: PropTypes.string
 };
 
 export default Tabs;

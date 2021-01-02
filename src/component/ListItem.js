@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 
 import '../App.css';
@@ -123,6 +124,13 @@ class ListItem extends Component {
   }
 }
 
+ListItem.propTypes = {
+  todoItem: PropTypes.object,
+  toggleTodoItemCompleted: PropTypes.func,
+  deleteTodoItem: PropTypes.func,
+  editTodoItem: PropTypes.func
+};
+
 export default ListItem;
 
 /**
@@ -181,6 +189,14 @@ const EditTodo = props => {
   );
 };
 
+EditTodo.propTypes = {
+  todoItem: PropTypes.object,
+  updateStateContent: PropTypes.func,
+  handleSave: PropTypes.func,
+  setEdit: PropTypes.func,
+  handleEscEnterPress: PropTypes.func
+};
+
 /**
  * Functional Component.
  * This renders single todo element
@@ -233,4 +249,11 @@ const TodoItemElement = props => {
       </div>
     </div>
   );
+};
+
+TodoItemElement.propsTypes = {
+  todoItem: PropTypes.object,
+  setEdit: PropTypes.func,
+  deleteItem: PropTypes.func,
+  toggleTodoItemCompleted: PropTypes.func
 };
